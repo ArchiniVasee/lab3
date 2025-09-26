@@ -1,26 +1,130 @@
-/* style.css */
-* { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, Arial, sans-serif; line-height: 1.5; }
-
-.site-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: #111; color: #fff; }
-.nav a { color: #fff; margin-left: 16px; text-decoration: none; }
-
-.container { padding: 24px; max-width: 1100px; margin: 0 auto; }
-.hero { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; }
-.hero img { width: 100%; height: auto; display: block; border-radius: 12px; }
-.hero-text h2 { margin: 0 0 8px; }
-
-.grid { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.card { border: 1px solid #e5e5e5; border-radius: 12px; padding: 16px; }
-.card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
-
-.site-footer { text-align: center; padding: 20px; color: #666; border-top: 1px solid #eee; }
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .grid { grid-template-columns: 1fr 1fr; }
+/* ===== Reset / base ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-@media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
+html, body {
+  height: 100%;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #e8ebf3;
+  background: #1f2227; /* dark page background */
+}
+
+/* ===== Top bar ===== */
+.topbar {
+  position: sticky; top: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px;
+  background: #2a2d33;         /* dark nav bar */
+  border-bottom: 1px solid #3a3d45;
+  z-index: 10;
+}
+.topbar a {
+  color: #d7e2ff;
+  text-decoration: none;
+  font-size: 15px;
+  margin-right: 18px;
+}
+.topbar .nav-left a:last-child { margin-right: 0; }
+.topbar .nav-right {
+  display: flex; align-items: center; gap: 10px;
+}
+.topbar a:hover { text-decoration: underline; }
+
+/* Sign Up button */
+.btn {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #4a90e2;
+  color: #fff !important;
+  border-radius: 4px;
+  border: 1px solid #387bc7;
+  text-decoration: none;
+}
+.btn:hover {
+  filter: brightness(1.06);
+  text-decoration: none;
+}
+
+/* ===== Content container ===== */
+.container {
+  max-width: 1100px;
+  margin: 16px auto 28px;
+  padding: 0 14px;
+}
+
+/* ===== Main Content Grid ===== */
+.content-grid {
+  display: grid;
+  /* Define 4 columns: rocket, sun, solar system, rover */
+  grid-template-columns: 2fr 1.2fr 2fr 1.5fr;
+  /* Define 2 rows: top images, bottom text area */
+  grid-template-rows: auto 1fr;
+  gap: 14px;
+  align-items: stretch; /* Make items fill the cell height */
+}
+
+/* --- Grid Item Placement --- */
+.img-rocket {
+  /* Place in column 1, span from row 1 to 3 (i.e., both rows) */
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+.content-box {
+  /* Place in column 2, span across to the end (column 5) */
+  grid-column: 2 / 5;
+  grid-row: 2 / 3; /* Place in the second row */
+}
+
+/* --- Image Styling --- */
+.content-grid img {
+  width: 100%;
+  object-fit: cover;   /* Keeps them uniform while cropping */
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+.img-rocket {
+  height: 100%; /* Make rocket fill the full height of the two rows */
+}
+.img-header {
+  height: 180px; /* Give a fixed height to the top-row images */
+}
+
+
+/* ===== Large text card ===== */
+.content-box {
+  background: #2b2f36;
+  color: #f3f4f6;
+  padding: 14px 16px;
+  line-height: 1.7;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+
+/* ===== Footer ===== */
+.footer {
+  border-top: 1px solid #3a3d45;
+  background: #23272e;
+  text-align: center;
+  padding: 12px 16px;
+  color: #c7cfde;
+  font-size: 14px;
+}
+
+/* ===== Responsive stacking ===== */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr; /* Stack everything in a single column */
+  }
+  /* Reset grid placement for all items for stacking */
+  .content-grid > * {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .img-header, .img-rocket {
+      height: 220px; /* Give all images a uniform height on mobile */
+  }
 }
